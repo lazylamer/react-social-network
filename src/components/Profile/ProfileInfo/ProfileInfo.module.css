@@ -1,0 +1,19 @@
+.profile {
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatar {
+    width: 175px;
+    height: 175px;
+}
+
+.name  {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+.text {
+    margin-left: 20px;
+}

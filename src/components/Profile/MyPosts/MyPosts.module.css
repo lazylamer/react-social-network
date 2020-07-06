@@ -1,0 +1,19 @@
+.wrapper {
+    margin-top: 20px;
+}
+
+.label h3{
+    margin-bottom: 10px;
+}
+
+.post {
+    width: 100%;
+    max-width: 800px;
+    height: 100px;
+    resize: none;
+}
+
+.btn {
+    text-transform: uppercase;
+    /*display: block;*/
+}
