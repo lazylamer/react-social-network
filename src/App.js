@@ -21,7 +21,7 @@ const App = () => {
                     <Route path='/profile' component={Profile}/>
                     <Route path='/conversations' component={Conversations}/>
                     <Route path='/music' component={Music} />
-                    {/*<Route path='/settings' component={Settings} />*/}
+                    <Route path='/settings' component={Settings} />
                     {/*<Profile />*/}
                     {/*<Conversations />*/}
                 </div>
