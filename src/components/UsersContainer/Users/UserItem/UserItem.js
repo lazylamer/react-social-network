@@ -9,20 +9,24 @@ import {usersAPI} from "../../../../api/api";
 const UserItem = props => {
 
     const follow = () => {
-        usersAPI.postFollowing()
+        props.followingInProgress(true);
+        usersAPI.postFollowing(props.id)
             .then(data => {
                 if (data.resultCode === 0) {
                     props.follow(props.id);
                 }
+                props.followingInProgress(false, props.id);
             });
     }
 
     const unFollow = () => {
-        usersAPI.deleteFollowing()
+        props.followingInProgress(true);
+        usersAPI.deleteFollowing(props.id)
             .then( data => {
                 if (data.resultCode === 0) {
                     props.unFollow(props.id);
                 }
+                props.followingInProgress(false, props.id);
             });
     }
 
@@ -33,8 +37,8 @@ const UserItem = props => {
                   <img src={props.photos.small != null ? props.photos.small : defaultImage } alt="avatar" className={styles.userImg}/>
               </NavLink>
               { props.followed
-                  ? <button onClick={ unFollow } className={styles.followButton}>unfollow</button>
-                  : <button onClick={ follow } className={styles.followButton}>follow</button>}
+                  ? <button disabled={props.isFollowingInProgress.some(id => id === props.id)} onClick={ unFollow } className={styles.followButton}>unfollow</button>
+                  : <button disabled={props.isFollowingInProgress.some(id => id === props.id)} onClick={ follow } className={styles.followButton}>follow</button>}
           </div>
           <div className={styles.userInfo}>
               <div className={styles.inner}>

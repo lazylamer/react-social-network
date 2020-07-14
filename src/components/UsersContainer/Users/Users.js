@@ -28,7 +28,9 @@ const Users = props => {
                         <UserItem id={user.id} photos={user.photos}
                                   name={user.name} status={user.status}
                                   location={user.location} followed={user.followed}
-                                  follow={props.follow} unFollow={props.unFollow}/>
+                                  follow={props.follow} unFollow={props.unFollow}
+                                  followingInProgress={props.followingInProgress}
+                                  isFollowingInProgress={props.isFollowingInProgress}/>
                     )
             }
         </div>

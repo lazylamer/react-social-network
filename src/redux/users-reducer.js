@@ -3,7 +3,8 @@ const FOLLOW              = 'FOLLOW',
       SET_USERS           = 'SET_USERS',
       SWITCH_CURRENT_PAGE = 'SWITCH_CURRENT_PAGE',
       SET_USERS_COUNT     = 'SET_USERS_COUNT',
-      TOGGLE_FETCH               = 'TOGGLE_FETCH';
+      TOGGLE_FETCH        = 'TOGGLE_FETCH',
+      FOLLOWING_IN_PROGRESS        = 'FOLLOWING_IN_PROGRESS';
 
 
 let initialState = {
@@ -11,7 +12,8 @@ let initialState = {
     pageSize: 5,
     totalCount: 19,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    isFollowingInProgress: []
 
 }
 
@@ -21,6 +23,7 @@ export const setUsers = (users) => ({type: 'SET_USERS', users})
 export const setUsersCount = (count) => ({type: 'SET_USERS_COUNT', count})
 export const switchCurrentPage = (currentPage) => ({type: 'SWITCH_CURRENT_PAGE', currentPage})
 export const toggleFetch = isFetching => ({ type: 'TOGGLE_FETCH', isFetching})
+export const followingInProgress = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId})
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -56,6 +59,13 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        case FOLLOWING_IN_PROGRESS:
+            return {
+                ...state,
+                isFollowingInProgress: action.isFetching
+                    ? [...state.isFollowingInProgress, action.userId]
+                    : state.isFollowingInProgress.filter(id => id !== action.userId)
             }
         default:
             return state;

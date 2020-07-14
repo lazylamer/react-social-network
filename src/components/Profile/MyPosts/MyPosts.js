@@ -4,8 +4,6 @@ import PostItem from "./PostItem/PostItem";
 
 const MyPosts = (props) => {
 
-    debugger;
-
     let postItems = props.data
         .map( (user) => <PostItem key={user.id} message={user.msg} username={user.name} src={user.src}/>);
 
