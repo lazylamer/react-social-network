@@ -1,33 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import Profile from './components/Profile/Profile';
-import Conversations from './components/Conversations/Conversations';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-// import ReactRouterComponent from "react-router-app/src/App";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
+import ConversationsContainer from "./components/Conversations/ConversationsContainer";
+import UsersContainer from "./components/UsersContainer/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import ProfilePageContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
-const App = () => {
+const App = props => {
+
     return (
-        <BrowserRouter>
-            <div className="wrapper">
-                <Header />
-                <Nav />
-                <div className="content">
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/conversations' component={Conversations}/>
-                    <Route path='/music' component={Music} />
-                    <Route path='/settings' component={Settings} />
-                    {/*<Profile />*/}
-                    {/*<Conversations />*/}
-                </div>
-                {/*<Footer />*/}
+        <div className="wrapper">
+            <HeaderContainer />
+            <Nav />
+
+            <div className="content">
+                <Route path='/profile/:userId?' render={ () => <ProfilePageContainer /> } />
+                <Route exact path='/conversations' render={ () => <ConversationsContainer  /> } />
+                <Route exact path='/users' render={ () => <UsersContainer />} />
+                <Route path='/music' render={() => <Music /> } />
+                <Route path='/settings' render={() => <Settings /> } />
             </div>
-        </BrowserRouter>
+            {/*<Footer />*/}
+        </div>
     );
 }
 

@@ -1,0 +1,89 @@
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+    flex: 1 1 0;
+    width: 100%;
+    height: auto;
+
+    font-size: 12px;
+
+    margin-bottom: 20px;
+}
+
+.item:last-child {
+    margin: 0;
+}
+
+.userIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-right: 10px;
+}
+.followButton {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    width: 79px;
+
+    text-align: center;
+    font-size: 10px;
+    text-transform: uppercase;
+
+    outline: 0;
+    border: 0;
+    background-color: #FAD57F;
+    transition:
+            color .3s linear,
+            background-color .3s linear;
+
+    cursor: pointer;
+}
+
+.followButton:hover {
+    color: #fff;
+    background-color: #de2974;
+}
+
+.userImg {
+    background-color: lightgray;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.userInfo {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid lightgray;
+
+    -webkit-box-shadow: -5px 10px 10px rgba(0, 0, 0, .2);
+    -moz-box-shadow: -5px 10px 10px rgba(0, 0, 0, .2);
+    box-shadow: -5px 10px 10px rgba(0, 0, 0, .2);
+}
+
+
+.inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.location {
+    display: flex;
+    flex-direction: column;
+}
+
+.status {
+    font-weight: 400;
+    font-style: italic;
+}

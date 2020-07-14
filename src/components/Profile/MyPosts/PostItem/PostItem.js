@@ -1,10 +1,11 @@
 import React from "react";
 import styles from './PostItem.module.css';
+
 const PostItem = (props) => {
     return (
-        <div className={styles.item}>
+        <div className={styles.item} id={props.key}>
             <div className={styles.user}>
-                <div className={styles.img}></div>
+                <img src={props.src} alt="" className={styles.img}/>
                 <p className={styles.username}>{props.username}</p>
             </div>
             <div className={styles.message}>
@@ -16,5 +17,4 @@ const PostItem = (props) => {
         </div>
     );
 }
-
 export default PostItem;

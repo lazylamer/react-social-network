@@ -1,5 +1,26 @@
-.wrapper {
+.wrapperOut {
     display: flex;
+}
+
+.wrapperIn {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.userPhoto {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.login {
+    font-weight: 400;
+    font-style: italic;
+
+    font-size: 12px;
 }
 
 .link {
@@ -15,8 +36,8 @@
     padding: 10px;
 
     transition:
-            color .2s linear,
-            background-color .2s linear;
+            color .3s linear,
+            background-color .3s linear;
 }
 
 .linkHighlited {
@@ -31,8 +52,8 @@
     padding: 10px;
 
     transition:
-            color .2s linear,
-            background-color .2s linear;
+            color .3s linear,
+            background-color .3s linear;
 
     color: #fff;
     background-color: #de2974;

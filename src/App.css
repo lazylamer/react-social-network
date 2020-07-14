@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  background-color: #FAD57F;
+}
+
 h1, h2, h3, h4, h5, p {
   margin: 0;
 }
@@ -16,7 +20,7 @@ body {
               rgba(247,121,112,1) 100%) no-repeat;
   background-size: cover;
   /*background-color: #333;*/
-
+  min-height: 100vh;
   font-size: 18px;
 }
 
@@ -38,6 +42,14 @@ body {
 
 .content {
   gird-area: content;
+
+  min-height: 87vh;
+
+  overflow-x: hidden;
+
+  width: 100%;
+  max-width: 730px;
+
   background-color: #fff;
   border-radius: 20px;
   -webkit-box-shadow: 5px 5px  rgba(0, 0, 0, 0.3);
@@ -45,6 +57,8 @@ body {
   box-shadow: 5px 5px  rgba(0, 0, 0, 0.3);
   padding: 10px 30px;
   margin: 10px 5px;
+
+  position: relative;
 }
 
 

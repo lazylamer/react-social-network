@@ -1,22 +1,30 @@
-.nav {
+.wrapper {
+    grid-area: nav;
     display: flex;
     flex-direction: column;
-    grid-area: nav;
-    background-color: #fff;
+
     -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.3);
     box-shadow: 5px 5px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+
+    border-radius: 15px;
+
     padding: 10px 30px;
     margin: 10px 5px;
 
-    color: #333;
 
     height: 100%;
     max-height: 400px;
+}
 
+.nav {
+    display: flex;
+    flex-direction: column;
+    color: #333;
 
+    margin-bottom: 120px;
 
-    border-radius: 15px;
 }
 
 .link {
@@ -27,11 +35,16 @@
 
     margin-bottom: 10px;
     transition: color .2s linear;
+
+    outline: 0;
 }
 
 .link:hover {
     color: #de2974;
-    text-decoration: underline;
+}
+
+.link.active {
+    color: #de2974;
 }
 
 .link:after {

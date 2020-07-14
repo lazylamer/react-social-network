@@ -1,0 +1,32 @@
+.title {
+    margin-bottom: 10px;
+}
+
+button {
+    cursor: pointer;
+    outline: 0;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+    font-size: 14px ;
+
+    overflow-x: auto;
+}
+
+.pages span{
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.pages span.active {
+    margin-top: -5px;
+    font-size: 20px;
+    color: #de2974;
+    font-weight: bold;
+}
+
+.pages span:last-child {
+    margin-right: 0;
+}

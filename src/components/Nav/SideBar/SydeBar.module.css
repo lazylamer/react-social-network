@@ -1,0 +1,10 @@
+.friendsWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+h4  {
+    text-align: center;
+    margin-bottom: 5px;
+}
