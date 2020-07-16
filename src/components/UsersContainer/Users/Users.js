@@ -2,8 +2,11 @@ import React from 'react';
 import styles from "./Users.module.css";
 import UserItem from "./UserItem/UserItem";
 import Router from "react-router-dom/es/Router";
+import {Redirect} from "react-router-dom";
 
 const Users = props => {
+
+    if (!props.isAuthorized) return <Redirect to='/login' />;
 
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
     let pages = [];

@@ -2,32 +2,18 @@ import React from 'react';
 import styles from './UserItem.module.css';
 import defaultImage from '../../../../imgs/peon.png'
 import {NavLink} from "react-router-dom";
-import * as axios from 'axios';
 import {usersAPI} from "../../../../api/api";
 
 
 const UserItem = props => {
 
     const follow = () => {
-        props.followingInProgress(true);
-        usersAPI.postFollowing(props.id)
-            .then(data => {
-                if (data.resultCode === 0) {
-                    props.follow(props.id);
-                }
-                props.followingInProgress(false, props.id);
-            });
+
+        props.follow(props.id);
     }
 
     const unFollow = () => {
-        props.followingInProgress(true);
-        usersAPI.deleteFollowing(props.id)
-            .then( data => {
-                if (data.resultCode === 0) {
-                    props.unFollow(props.id);
-                }
-                props.followingInProgress(false, props.id);
-            });
+        props.unFollow(props.id);
     }
 
     return(

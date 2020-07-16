@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
     return {
         data: state.conversationPage.messagesData,
         newMessageText: state.conversationPage.newMessageText,
+        isAuthorized: state.auth.isAuthorized
 
     }
 }

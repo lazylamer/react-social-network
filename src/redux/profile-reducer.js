@@ -1,12 +1,23 @@
-const ADD_POST                = 'ADD-POST',
-      UPDATE_NEW_FORM_TEXT    = 'UPDATE-NEW-POST-TEXT',
-      SET_USER_PAGE           = 'SET_USER_PAGE';
+import {profileAPI} from "../api/api";
+
+const ADD_POST = 'ADD-POST',
+    UPDATE_NEW_FORM_TEXT = 'UPDATE-NEW-POST-TEXT',
+    SET_USER_PAGE = 'SET_USER_PAGE';
 
 
 export const addPostActionCreator = () => ({type: ADD_POST});
-export const onPostChangeActionCreator = text => ({type: UPDATE_NEW_FORM_TEXT,updatedText: text});
-export const setUserPage = profile => ({ type: SET_USER_PAGE, profile})
+export const onPostChangeActionCreator = text => ({type: UPDATE_NEW_FORM_TEXT, updatedText: text});
+export const setUserPage = profile => ({type: SET_USER_PAGE, profile})
 
+export const getProfile = id =>
+    (dispatch) => {
+        let userId = id;
+        if (!userId) userId = 9230;
+        profileAPI.getProfile(userId)
+            .then(data => {
+               dispatch(setUserPage(data));
+            });
+    }
 
 let initialState = {
     users: [
@@ -41,10 +52,10 @@ const _generateName = () => {
 
 const profileReducer = (state = initialState, action) => {
 
-    switch(action.type) {
+    switch (action.type) {
         case ADD_POST:
             if (!state.newPostText) return state;
-            let newPost= {
+            let newPost = {
                 id: state.users[state.users.length - 1].id + 1,
                 msg: state.newPostText,
                 name: _generateName()

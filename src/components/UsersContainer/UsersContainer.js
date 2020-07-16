@@ -1,42 +1,20 @@
 import React from 'react';
-import {
-    follow,
-    setUsers,
-    setUsersCount,
-    switchCurrentPage,
-    unFollow,
-    toggleFetch, followingInProgress
-} from '../../redux/users-reducer';
+import {getUsers, unFollow, follow} from '../../redux/users-reducer';
 import Users from './Users/Users';
 import Spinner from "../common/Spinner/Spinner";
 import connect from "react-redux/lib/connect/connect";
-import {usersAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        if (this.props.users.length === 0) {
-            this.props.toggleFetch(true);
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(response => {
-                    this.props.toggleFetch(false);
-                    this.props.setUsers(response.items);
-                    this.props.setUsersCount(response.totalCount);
-                });
-        }
+        this.props.getUsers(this.props.users ,this.props.currentPage, this.props.pageSize);
     }
 
     switchPage = page => {
-        this.props.switchCurrentPage(page);
-        this.props.toggleFetch(true);
-        usersAPI.getUsers(page, this.props.pageSize).then(response => {
-                this.props.toggleFetch(false);
-                this.props.setUsers(response.items)
-            });
+        this.props.getUsers(this.props.users, page, this.props.pageSize);
     }
 
     render() {
-
-
         return (
             <>
                 { this.props.isFetching ? <Spinner /> : null }
@@ -49,7 +27,8 @@ class UsersAPIComponent extends React.Component {
                        isFetchinh={this.props.isFetching}
                        follow={this.props.follow}
                        followingInProgress={this.props.followingInProgress}
-                       isFollowingInProgress={this.props.isFollowingInProgress}/>
+                       isFollowingInProgress={this.props.isFollowingInProgress}
+                       isAuthorized={this.props.isAuthorized}/>
 
             </>
         );
@@ -64,11 +43,12 @@ const mapStateToProps = state => {
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowingInProgress: state.usersPage.isFollowingInProgress
+        isFollowingInProgress: state.usersPage.isFollowingInProgress,
+        isAuthorized: state.auth.isAuthorized
     }
 }
 
 const UsersContainer = connect(mapStateToProps,
-    {follow, unFollow, setUsers, switchCurrentPage, setUsersCount, toggleFetch, followingInProgress})(UsersAPIComponent);
+    { getUsers, follow, unFollow})(UsersAPIComponent);
 
 export default UsersContainer;

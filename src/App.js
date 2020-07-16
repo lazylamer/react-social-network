@@ -10,6 +10,7 @@ import UsersContainer from "./components/UsersContainer/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import ProfilePageContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 const App = props => {
@@ -25,6 +26,7 @@ const App = props => {
                 <Route exact path='/users' render={ () => <UsersContainer />} />
                 <Route path='/music' render={() => <Music /> } />
                 <Route path='/settings' render={() => <Settings /> } />
+                <Route path='/login' render={ () => <Login />} />
             </div>
             {/*<Footer />*/}
         </div>

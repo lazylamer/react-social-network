@@ -3,11 +3,11 @@ import styles from './Conversations.module.css';
 import ChatUsers from './ChatUsers/ChatUsers';
 import Messages from './Messages/Messages';
 import {onMessageTextChangeActionCreator, sendMessageActionCreator} from "../../redux/conversation-reducer";
+import {Redirect} from "react-router-dom";
 
 
 const Conversations = (props) => {
 
-    console.log(props)
     // GENERATING COMPONENTS
     let chatUsersElements = props.data
         .map( user => <ChatUsers key={user.id} username={user.name} src={user.src}/>);
@@ -27,6 +27,7 @@ const Conversations = (props) => {
         props.onChangeMessageInput(text);
     }
 
+    if (!props.isAuthorized) return <Redirect to='/login' />;
     return (
         <div className={styles.messages}>
 
