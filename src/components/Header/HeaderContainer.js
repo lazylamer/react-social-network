@@ -1,26 +1,19 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Header from "./Header";
-import * as axios from 'axios';
 import connect from "react-redux/lib/connect/connect";
-import {checkAuth, setAuthUserData} from "../../redux/auth-reducer";
-import {authAPI} from "../../api/api";
+import {logOut} from "../../redux/auth-reducer";
 
-class HeaderContainer extends React.Component {
-    componentDidMount() {
-        this.props.checkAuth();
-    }
-
-    render() {
+const HeaderContainer = memo(props => {
         return(
-            <Header {...this.props}/>
+            <Header {...props}/>
         )
-    }
-}
+});
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     isAuthorized: state.auth.isAuthorized,
     login: state.auth.login
 })
 
 
-export default connect(mapStateToProps, {checkAuth})(HeaderContainer);
+export default connect(mapStateToProps, {logOut})(HeaderContainer);
+

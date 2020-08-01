@@ -1,7 +1,9 @@
 import React from 'react';
-import {onMessageTextChangeActionCreator, sendMessageActionCreator} from "../../redux/conversation-reducer";
+import {sendMessageActionCreator} from "../../redux/conversation-reducer";
 import Conversations from "./Conversations";
 import connect from "react-redux/lib/connect/connect";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 const mapStateToProps = (state) => {
@@ -15,16 +17,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onChangeMessageInput: (text) => {
-            dispatch(onMessageTextChangeActionCreator(text));
-        },
-        sendMessage: () => {
-            dispatch(sendMessageActionCreator());
+        sendMessage: newMessage => {
+            dispatch(sendMessageActionCreator(newMessage));
         }
     }
 }
 
-const ConversationsContainer = connect(mapStateToProps, mapDispatchToProps)(Conversations);
-
-
-export default ConversationsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Conversations);

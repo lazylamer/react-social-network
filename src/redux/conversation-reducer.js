@@ -1,14 +1,5 @@
-const SEND_MESSAGE = 'SEND-MESSAGE',
-    UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const SEND_MESSAGE = 'social-network/conversation-reducer/SEND-MESSAGE';
 
-export const sendMessageActionCreator = () => ({
-    type: SEND_MESSAGE
-});
-
-export const onMessageTextChangeActionCreator = text => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    updatedText: text
-});
 
 let initialState = {
     messagesData: [
@@ -37,30 +28,29 @@ const _generateName = () => {
     }
     return name;
 }
-
 const conversationReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SEND_MESSAGE:
-            if (!state.newMessageText) return state;
+            if (!action.newMessage) return state;
             let newMessage = {
                 id: state.messagesData[state.messagesData.length - 1].id + 1,
-                msg: state.newMessageText,
+                msg: action.newMessage,
                 name: _generateName()
             };
             return {
                 ...state,
-                newMessageText: '',
                 messagesData: [...state.messagesData, newMessage]
-            };
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.updatedText
             };
         default:
             return state;
     }
 }
+export const sendMessageActionCreator = newMessage => ({
+    type: SEND_MESSAGE,
+    newMessage
+});
+
+
 
 export default conversationReducer;

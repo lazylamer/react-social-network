@@ -1,15 +1,14 @@
 import React from "react";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {Redirect} from "react-router-dom";
 
-const Profile = props => {
+const Profile = ({profile, updateStatus, status}) => {
 
-    if (!props.isAuthorized) return <Redirect to='/login' />;
+    debugger
     return (
 
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={profile} updateStatus={updateStatus} status={status}/>
             <MyPostsContainer />
         </div>
     );

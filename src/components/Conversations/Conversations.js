@@ -2,8 +2,7 @@ import React from 'react';
 import styles from './Conversations.module.css';
 import ChatUsers from './ChatUsers/ChatUsers';
 import Messages from './Messages/Messages';
-import {onMessageTextChangeActionCreator, sendMessageActionCreator} from "../../redux/conversation-reducer";
-import {Redirect} from "react-router-dom";
+import MessageForm from "./MessageForm/MessageForm";
 
 
 const Conversations = (props) => {
@@ -14,20 +13,7 @@ const Conversations = (props) => {
     let messageElements = props.data
         .map( user => <Messages key={user.id} username={user.name} src={user.src} msg={user.msg}/>);
 
-    let chatInputField = React.createRef();
 
-    //LISTENERS
-    let sendMessage = (e) => {
-        e.preventDefault();
-        props.sendMessage();
-    }
-
-    let onChangeMessageInput = () => {
-        let text = chatInputField.current.value;
-        props.onChangeMessageInput(text);
-    }
-
-    if (!props.isAuthorized) return <Redirect to='/login' />;
     return (
         <div className={styles.messages}>
 
@@ -43,16 +29,9 @@ const Conversations = (props) => {
                 <div className={styles.chat}>
                     {messageElements}
                 </div>
-                <div className={styles.typingArea}>
 
-                    {/*<label htmlFor="newMessage">New message</label>*/}
-                    <button onClick={ sendMessage } className={styles.inputButton}>></button>
-                    <textarea onChange={ onChangeMessageInput } ref={chatInputField} name=""
-                              id="" cols="30" rows="10"
-                              value={props.newMessageText}/>
-                    {/*<div ref={chatInputField} className={styles.chatInput} tabIndex="0" role="textBox"
-                         aria-multiline="true" contentEditable="true" placeholder="Write message..."></div>*/}
-                </div>
+                <MessageForm sendMessage={props.sendMessage}/>
+
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ import styles from './Header.module.css';
 import LoginBar from "./LoginBar/LoginBar";
 
 const Header = props => {
+
     return (
         <header className={styles.header}>
             <h1 className={styles.logo}>MOP</h1>

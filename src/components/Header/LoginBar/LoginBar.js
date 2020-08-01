@@ -4,11 +4,17 @@ import {NavLink} from "react-router-dom";
 import defaultPhoto from '../../../imgs/peon.png';
 
 const LoginBar = props => {
+
+        const logOut = () => {
+            props.logOut();
+        }
+
         if (props.isAuthorized) {
             return(
                 <div className={styles.wrapperIn}>
                     <img src={defaultPhoto} alt="#" className={styles.userPhoto}/>
                     <span className={styles.login}>{props.login}</span>
+                    <button onClick={logOut} >logOut</button>
                 </div>
             );
         } else {

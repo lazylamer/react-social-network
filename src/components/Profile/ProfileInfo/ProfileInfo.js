@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./ProfileInfo.module.css";
 import Spinner from "../../common/Spinner/Spinner";
 import defaultPhoto from '../../../imgs/peon.png'
+import Status from "./Status/Status";
+import Profile from "../Profile";
+import StatusWithHooks from "./Status/StatusWithHooks";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = props => {
 
     if (!props.profile) {
         return <Spinner />
@@ -16,6 +19,9 @@ const ProfileInfo = (props) => {
                     <p className={styles.text}>Education</p>
                     <p className={styles.text}>Job: { props.profile.job ? 'finding' : 'working'}</p>
                     <p className={styles.text}>Interests</p>
+
+                    <StatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+
                     <div className={styles.contactsWrapper}>
                         <a href="#" className={styles.contactLink}>Contacts</a>
                         <div className={styles.contacts}>

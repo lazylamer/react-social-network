@@ -1,0 +1,13 @@
+.status {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.status span:last-child {
+    margin-left: 5px;
+}
+
+.statusText {
+    cursor: pointer;
+}

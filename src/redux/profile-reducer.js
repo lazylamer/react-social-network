@@ -1,21 +1,41 @@
 import {profileAPI} from "../api/api";
 
-const ADD_POST = 'ADD-POST',
-    UPDATE_NEW_FORM_TEXT = 'UPDATE-NEW-POST-TEXT',
-    SET_USER_PAGE = 'SET_USER_PAGE';
+const ADD_POST      = 'ADD-POST',
+      SET_USER_PAGE = 'SET_USER_PAGE',
+      SET_STATUS    = 'SET_STATUS',
+      REMOVE_POST   = 'REMOVE_POST';
 
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const onPostChangeActionCreator = text => ({type: UPDATE_NEW_FORM_TEXT, updatedText: text});
-export const setUserPage = profile => ({type: SET_USER_PAGE, profile})
+export const addPostActionCreator = newPost => ({type: ADD_POST, newPost});
+export const setUserPage = profile => ({type: SET_USER_PAGE, profile});
+export const setStatus = text => ({type: SET_STATUS, text});
+export const removePost = postId => ({type: REMOVE_POST, postId});
 
+
+//THUNK
 export const getProfile = id =>
     (dispatch) => {
-        let userId = id;
-        if (!userId) userId = 9230;
-        profileAPI.getProfile(userId)
+        profileAPI.getProfile(id)
             .then(data => {
                dispatch(setUserPage(data));
+            });
+    }
+
+export const getStatus = id =>
+    (dispatch) => {
+        profileAPI.getStatus(id)
+            .then(data => {
+                dispatch(setStatus(data))
+            });
+    }
+
+export const updateStatus = newStatus =>
+    (dispatch) => {
+        profileAPI.updateStatus(newStatus)
+            .then(data =>{
+                if(data.resultCode === 0) {
+                    dispatch(setStatus(newStatus));
+                }
             });
     }
 
@@ -34,13 +54,12 @@ let initialState = {
             msg: 'Very many letters again'
         }
     ],
-    newPostText: '',
-    profile: null
-
+    profile: null,
+    status: ''
 };
 
 
-const _generateName = () => {
+const generateName = () => {
     let characters = 'qwertyuiopasdfghjklzxcvbnm';
     let name = '';
     let count = Math.floor(Math.random() * 10);
@@ -54,26 +73,30 @@ const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_POST:
-            if (!state.newPostText) return state;
+            if (!action.newPost) return state;
             let newPost = {
                 id: state.users[state.users.length - 1].id + 1,
-                msg: state.newPostText,
-                name: _generateName()
+                msg: action.newPost,
+                name: generateName()
             };
             return {
                 ...state,
-                newPostText: '',
-                usersData: [...state.users, newPost]
+                users: [...state.users, newPost]
             };
-        case UPDATE_NEW_FORM_TEXT:
+        case REMOVE_POST:
             return {
                 ...state,
-                newPostText: action.updatedText
-            };
+                users: state.users.filter(item => item.id !== action.postId)
+            }
         case SET_USER_PAGE:
             return {
                 ...state,
                 profile: action.profile
+            }
+        case SET_STATUS:
+            return  {
+                ...state,
+                status: action.text
             }
         default:
             return state;

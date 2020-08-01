@@ -60,6 +60,10 @@
     animation-duration: 1s;
 }
 
+.contacts a {
+    cursor: pointer;
+}
+
 .social {
     padding: 5px;
     text-decoration: none;
