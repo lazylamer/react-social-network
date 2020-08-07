@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import conversationReducer from "./conversation-reducer";
 import sideBarReducer from "./side-bar-reducer";
@@ -17,8 +17,12 @@ let reducers = combineReducers({
     app: appReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-window.store = store;
+let store = createStore(reducers, composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
+
+window.__store__ = store;
 
 export default store;

@@ -21,7 +21,6 @@ body {
               rgba(251,215,128,1) 0%,
               rgba(247,121,112,1) 100%) no-repeat;
   background-size: cover;
-  /*background-color: #333;*/
   min-height: 100vh;
   font-size: 18px;
 }

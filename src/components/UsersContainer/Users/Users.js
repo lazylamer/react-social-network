@@ -6,7 +6,7 @@ import Paginator from "./Paginator/Paginator";
 const Users = props => {
     return (
         <div>
-            <Paginator totalCount={props.totalCount}
+            <Paginator totalItemsCount={props.totalCount}
                        pageSize={props.pageSize}
                        currentPage={props.currentPage}
                        switchPage={props.switchPage}/>

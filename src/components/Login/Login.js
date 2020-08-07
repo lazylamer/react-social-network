@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Login.module.css'
 import LoginForm from "./LoginForm/LoginForm";
-import {logIn, logOut} from "../../redux/auth-reducer";
+import {getCaptcha, logIn, logOut} from "../../redux/auth-reducer";
 import connect from "react-redux/lib/connect/connect";
 import Redirect from "react-router-dom/es/Redirect";
+import {obtainAuthorizedStatus, obtainCaptchaUrl} from "../../redux/auth-selectors";
 
 
 
@@ -21,8 +22,9 @@ const Login = props => {
 }
 
 const mapStateToProps = state => ({
-    isAuthorized: state.auth.isAuthorized
+    isAuthorized: obtainAuthorizedStatus(state),
+    captchaUrl: obtainCaptchaUrl(state)
 })
 
 
-export default connect(mapStateToProps, {logIn, logOut})(Login);
+export default connect(mapStateToProps, {logIn, logOut, getCaptcha})(Login);

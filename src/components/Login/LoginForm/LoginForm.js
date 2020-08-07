@@ -4,12 +4,18 @@ import {Form} from "react-final-form";
 import {required} from "../../../utils/validators/validators";
 import FormsValidation, {createField} from "../../common/FormsValidation/FormsValidation";
 import {FORM_ERROR} from "final-form";
+import Captcha from "../Captcha/Captcha";
 
 const LoginForm = props => {
 
     const logIn = values => {
-        props.logIn(values.email, values.password, values.checkbox);
-        return {[FORM_ERROR]: 'Password or email is incorrect'};
+        console.log(values);
+        props.logIn(values.email, values.password, values.checkbox, values.captcha);
+        if (props.captchaUrl) {
+            return {[FORM_ERROR]: 'incorrect anti-bot symbols'}
+        } else {
+            return {[FORM_ERROR]: 'Password or email is incorrect'};
+        }
     }
 
     const Input = FormsValidation('input');
@@ -36,6 +42,9 @@ const LoginForm = props => {
                                   {type: "checkbox", className: `${styles.checkbox}`})}
                               <span className={styles.checkboxText}>remember me</span>
                           </div>
+                          { props.captchaUrl && <img src={`${props.captchaUrl}`} alt="captcha"/>}
+                          {/*{ props.captchaUrl && createField(Input, 'captcha', {placeholder: 'write symbols'})}*/}
+                          { props.captchaUrl && <Captcha validate={required} />}
                           {submitError && <span>{submitError}</span>}
                           <button type="submit" className={styles.btn}>Login</button>
                       </form>

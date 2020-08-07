@@ -11,12 +11,16 @@ const StatusWithHooks = props => {
     }, [props.status])
 
     const turnOnEditMode = () => {
-        setEditMode(true);
+        if (props.isOwner) {
+            setEditMode(true);
+        }
     }
 
     const turnOffEditMode = () => {
-        setEditMode(false);
-        props.updateStatus(status)
+        if (props.isOwner) {
+            setEditMode(false);
+            props.updateStatus(status);
+        }
     }
 
     const updateStatus = e => {
@@ -27,7 +31,7 @@ const StatusWithHooks = props => {
         <div className={styles.status}>
             <span>Status:</span>
             <div className={styles.statusItem}>
-                {editMode && <input value={status} onChange={ updateStatus }
+                {editMode  && <input value={status} onChange={ updateStatus }
                                     type="text" onBlur={ turnOffEditMode}
                                     autoFocus={true}/>}
                 {!editMode && <span onDoubleClick={ turnOnEditMode }
